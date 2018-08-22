@@ -1,0 +1,94 @@
+<main role="main" *ngIf="foodtruck">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+        <h4 class="card-title">
+                <a href="/app/foodtruck/{{foodtruck._id}}">{{foodtruck.name}}</a>
+            </h4>
+      <p class="lead">{{foodtruck.subtitle}}</p>
+      <p class="lead">
+        <a *ngFor="let day of foodtruck.days" class="btn btn-secondary" href="/app/day/{{day}}" role="button">{{day | amParse:'E' | amDateFormat:'dddd'}}</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <p>{{foodtruck.description}}</p>
+  </div>
+
+  <div class="container">
+    <h1>Menu List</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Menu</th>
+          <th scope="col">Prix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let menu of foodtruck.menuList ; index as i">
+          <th scope="row">{{i}}</th>
+          <td>{{menu.name}}</td>
+          <td>{{menu.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <h1>Plats</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Plat</th>
+          <th scope="col">Ingredients</th>
+          <th scope="col">Categories</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let meal of foodtruck.mealList; index as i">
+          <th scope="row">{{i}}</th>
+          <td>{{meal.name}}</td>
+          <td>{{meal.ingredientList}}</td>
+          <td>{{meal.categoryList}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <h1>Contact</h1>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">Name</th>
+          <td>{{foodtruck.contact.name}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Adresse</th>
+          <td>{{foodtruck.contact.address}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Phone</th>
+          <td>{{foodtruck.contact.phone}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Website</th>
+          <td>{{foodtruck.contact.website}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Social</th>
+          <td><ul>
+            <li>Facebook : {{foodtruck.contact.social.facebook}}</li>
+            <li>Twitter : {{foodtruck.contact.social.twitter}}</li>
+            <li>Google+ : {{foodtruck.contact.social.googleplus}}</li>
+          </ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>

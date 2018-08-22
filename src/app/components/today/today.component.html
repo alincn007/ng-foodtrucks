@@ -1,0 +1,32 @@
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Today</h1>
+      <p class="lead">{{today | amDateFormat:'dddd Do MMMM YYYY'}}</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div *ngFor="let foodtruck of foodtrucks" class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="/app/foodtruck/{{foodtruck._id}}">{{foodtruck.name}}</a>
+            </h4>
+            <p class="card-text">{{foodtruck.description}}</p>
+            <a *ngFor="let day of foodtruck.days" href="/app/day/{{day}}" class="card-link">
+                {{day | amParse:'E' | amDateFormat:'dddd'}}
+                <div class="arrow"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>

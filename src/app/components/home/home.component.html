@@ -1,0 +1,22 @@
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-6">Welcome to <strong>Foodtrucks</strong>!</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let foodtruck of foodtrucks" class="col-md-4">
+        <h2 class="card-title">
+            <a href="/app/foodtruck/{{foodtruck._id}}">{{foodtruck.name}}</a>
+        </h2>
+        <p>{{foodtruck.description}}</p>
+      </div>
+    </div>
+  </div>
+  <!-- /container -->
+
+</main>

@@ -1,0 +1,195 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/app/admin">
+              Administration
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/app/admin/foodtrucks">
+              Foodtrucks
+            </a>
+          </li>
+        </ul>
+
+        <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Saved reports</span>
+          <a class="d-flex align-items-center text-muted" href="#">
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Current month
+            </a>
+          </li>
+        </ul> -->
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{foodtruck.name}}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form>
+        <!-- Name -->
+        <div class="form-group">
+          <label for="foodtruckName">Name</label>
+          <input [(ngModel)]="foodtruck.name" name="foodtruckName" class="form-control" placeholder="Enter name">
+        </div>
+
+        <!-- days: number[]; -->
+        <div class="form-group">
+          <label for="foodtruckDays">Days</label>
+          <select multiple class="form-control" id="foodtruckDays" aria-describedby="foodtruckDaysHelp">
+            <option *ngFor="let day of week">{{day | amParse:'E' | amDateFormat:'dddd'}}</option>
+          </select>
+          <small id="foodtruckDaysHelp" class="form-text text-muted">Select delivery days</small>
+        </div>
+
+        <!-- description: string; -->
+        <div class="form-group">
+          <label for="foodtruckDescription">Description</label>
+          <textarea [(ngModel)]="foodtruck.description" name="foodtruckDescription" class="form-control" id="foodtruckDescription" rows="3"></textarea>
+        </div>
+
+        <!-- subtitle: string; -->
+        <div class="form-group">
+          <label for="foodtruckSubtitle">Subtitle</label>
+          <input [(ngModel)]="foodtruck.subtitle" name="foodtruckSubtitle" class="form-control" id="foodtruckSubtitle" placeholder="Enter subtitle">
+        </div>
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 class="h4">Menu</h1>
+        </div>
+
+        <!-- menuList: Menu[]; -->
+
+        <!-- Add new menu -->
+        <form class="form-inline">
+
+          <!-- Name -->
+          <label class="sr-only" for="menuName">Name</label>
+          <input type="text" class="form-control mb-4 mr-sm-4" id="menuName" placeholder="Menu name">
+
+          <!-- Price -->
+          <label class="sr-only" for="menuPrice">Prix</label>
+          <div class="input-group mb-4 mr-sm-4">
+            <input type="text" class="form-control" id="menuPrice" placeholder="Price">
+            <div class="input-group-append">
+              <div class="input-group-text">€</div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary mb-4">Add menu</button>
+        </form>
+
+        <!-- List of menus -->
+        <form *ngFor="let menu of foodtruck.menuList" class="form-inline">
+          <!-- Name -->
+          <label class="sr-only" for="menuName">Name</label>
+          <input [(ngModel)]="menu.name" name="menuName" class="form-control mb-4 mr-sm-4" id="menuName" placeholder="Menu 1" readonly>
+          <!-- Price -->
+          <label class="sr-only" for="menuPrice">Prix</label>
+          <div class="input-group mb-4 mr-sm-4">
+            <input [(ngModel)]="menu.price" name="menuPrice" class="form-control" id="menuPrice" placeholder="10" readonly>
+            <div class="input-group-append">
+              <div class="input-group-text">€</div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger mb-4">Remove menu</button>
+        </form>
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 class="h4">Dishes</h1>
+        </div>
+
+        <!-- mealList: Meal[]; -->
+        <!-- Add new meal -->
+        <div class="form-group">
+          <form>
+            <!-- Name -->
+            <div class="form-group">
+              <label for="mealName">Name</label>
+              <input type="text" class="form-control" id="mealName" placeholder="Add menu name">
+            </div>
+
+            <!-- Add new ingredient -->
+            <form class="form-inline">
+              <label class="sr-only" for="ingredient">Ingredient</label>
+              <input type="text" class="form-control mb-4 mr-sm-4" id="ingredient" placeholder="Ingredient">
+              <button type="submit" class="btn btn-primary mb-4">Add Ingredient</button>
+            </form>
+
+            <!-- List of ingredients -->
+            <form class="form-inline">
+              <label class="sr-only" for="ingredient">Ingrédient</label>
+              <input type="text" class="form-control mb-4 mr-sm-4" id="ingredient" placeholder="Ingredient 1" readonly>
+              <button type="submit" class="btn btn-danger mb-4">Remove ingredient</button>
+            </form>
+
+            <!-- Add new category -->
+            <form class="form-inline">
+              <label class="sr-only" for="category">Category</label>
+              <input type="text" class="form-control mb-4 mr-sm-4" id="category" placeholder="Catégorie">
+              <button type="submit" class="btn btn-primary mb-4">Add category</button>
+            </form>
+
+            <!-- List of categories -->
+            <form class="form-inline">
+              <label class="sr-only" for="categories">Categorie</label>
+              <input type="text" class="form-control mb-4 mr-sm-4" id="categories" placeholder="Catégorie 1" readonly>
+              <button type="submit" class="btn btn-danger mb-4">Remove category</button>
+            </form>
+
+            <!-- Add meal -->
+            <button type="submit" class="btn btn-primary mb-4">Add menu</button>
+          </form>
+        </div>
+
+        <!-- List of meals -->
+        <div *ngFor="let meal of foodtruck.mealList" class="form-group">
+          <form>
+            <!-- Name -->
+            <div class="form-group">
+              <label for="mealName">Name</label>
+              <input [(ngModel)]="meal.name" name="mealName" class="form-control" id="mealName" placeholder="Plat 1" readonly>
+            </div>
+            <!-- List of ingredients -->
+            <form *ngFor="let ingredient of meal.ingredientList" class="form-inline">
+              <label class="sr-only" for="ingredient">Ingrédient</label>
+              <input type="text" class="form-control mb-4 mr-sm-4" id="ingredient" placeholder="{{ingredient}}" readonly>
+            </form>
+            <!-- List of categories -->
+            <form *ngFor="let category of meal.categoryList" class="form-inline">
+              <label class="sr-only" for="categories">Catégorie</label>
+              <input type="text" class="form-control mb-4 mr-sm-4" id="categories" placeholder="{{category}}" readonly>
+            </form>
+            <button type="submit" class="btn btn-danger mb-2">Supprimer le plat</button>
+          </form>
+        </div>
+
+        <!-- contact: Contact; -->
+
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+      </form>
+
+    </main>
+  </div>
+</div>

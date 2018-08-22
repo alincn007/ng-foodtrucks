@@ -10,5 +10,5 @@ export class Foodtruck {
   subtitle: string;
   menuList: Menu[];
   mealList: Meal[];
-  contact: Contact;
+  contact?: Contact;
 }
